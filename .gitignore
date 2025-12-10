@@ -1,5 +1,3 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
 # Compiled output
 /dist
 /tmp
@@ -42,3 +40,5 @@ testem.log
 Thumbs.db
 
 my-app/.angular/cache/
+my-app/src/environments/environment.ts
+my-app/src/environments/environment.development.ts
