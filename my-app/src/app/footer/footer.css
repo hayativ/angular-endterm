@@ -1,0 +1,43 @@
+.subscribe-block {
+  margin: 20px 0;
+  font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+  text-align: left;
+}
+
+.text {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: black;
+}
+
+.subscribe-block button {
+  margin: 5px;
+  padding: 8px 12px;
+  background: cornflowerblue;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.subscribe-block button:hover {
+  background: royalblue;
+  transform: translateY(-2px);
+}
+
+.subscribe-block input {
+  width: 40%;
+  padding: 7px 12px;
+  border: 2px solid whitesmoke;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.subscribe-block input:focus {
+  outline: none;
+  border-color: cornflowerblue;
+  box-shadow: 0 0 0 3px rgba(100, 149, 237, 0.1);
+}
