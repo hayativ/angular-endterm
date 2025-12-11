@@ -9,6 +9,11 @@ export interface PaintingState {
     loadingDetails: boolean;
     errorList: string | null;
     errorDetails: string | null;
+    // Pagination state
+    totalCount: number;
+    currentPage: number;
+    totalPages: number;
+    itemsPerPage: number;
 }
 
 export const initialState: PaintingState = {
@@ -18,6 +23,11 @@ export const initialState: PaintingState = {
     loadingDetails: false,
     errorList: null,
     errorDetails: null,
+    // Pagination initial state
+    totalCount: 0,
+    currentPage: 1,
+    totalPages: 1,
+    itemsPerPage: 9,
 };
 
 export const paintingReducer = createReducer(
@@ -27,9 +37,12 @@ export const paintingReducer = createReducer(
         loadingList: true,
         errorList: null,
     })),
-    on(PaintingActions.loadPaintingsSuccess, (state, { paintings }) => ({
+    on(PaintingActions.loadPaintingsSuccess, (state, { paintings, totalCount, currentPage, totalPages }) => ({
         ...state,
         paintings,
+        totalCount,
+        currentPage,
+        totalPages,
         loadingList: false,
     })),
     on(PaintingActions.loadPaintingsFailure, (state, { error }) => ({

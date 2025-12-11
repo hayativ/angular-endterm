@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../services/translation.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,18 +11,21 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./footer.css']
 })
 export class Footer {
+  readonly translationService = inject(TranslationService);
+  
   ticketCnt = 0;
   email = '';
-  ticketButton = 'Add';
-  ticketMessage = 'Click to add ticket';
-  buyButton = 'Buy tickets';
-  paymentMessage = '';
+  showPaymentMessage = false;
+
+  get t() {
+    return this.translationService.translations().footer;
+  }
 
   ticket() {
     this.ticketCnt++;
   }
 
   buy() {
-    this.paymentMessage = `We'll send payment to your email`;
+    this.showPaymentMessage = true;
   }
 }

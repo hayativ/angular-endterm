@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Painting, PaintingsService } from '../services/paintings.service';
+import { TranslationService } from '../services/translation.service';
 import * as PaintingActions from '../painting/state/painting.actions';
 import * as PaintingSelectors from '../painting/state/painting.selectors';
 
@@ -15,10 +16,13 @@ import * as PaintingSelectors from '../painting/state/painting.selectors';
     styleUrl: './home.css'
 })
 export class Home implements OnInit {
-    title = 'Art Institute of Chicago';
-    subtitle = 'Discover World-Class Art';
+    readonly translationService = inject(TranslationService);
     featuredPaintings$: Observable<Painting[]>;
     loading$: Observable<boolean>;
+
+    get t() {
+        return this.translationService.translations().home;
+    }
 
     constructor(
         private readonly paintingsService: PaintingsService,

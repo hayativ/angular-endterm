@@ -23,6 +23,20 @@ export interface Painting {
 
 export interface ArtworksResponse {
   data: Painting[];
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+    total_pages: number;
+    current_page: number;
+  };
+}
+
+export interface PaginatedPaintingsResponse {
+  paintings: Painting[];
+  totalCount: number;
+  currentPage: number;
+  totalPages: number;
 }
 
 @Injectable({
@@ -32,20 +46,34 @@ export class PaintingsService {
   private readonly baseUrl = 'https://api.artic.edu/api/v1/artworks';
   private readonly fields = 'id,title,artist_display,image_id,date_display';
   private readonly detailFields = 'id,title,artist_display,image_id,date_display,description,short_description,medium_display,dimensions,credit_line,place_of_origin,inscriptions,publication_history,exhibition_history,provenance_text';
+  private readonly defaultLimit = 9;
 
   constructor(private readonly http: HttpClient) { }
 
-  getPaintings(query?: string): Observable<Painting[]> {
-    let url = `${this.baseUrl}?fields=${this.fields}&page=1&limit=6`;
-    if (query && query.trim()) {
-      url = `${this.baseUrl}/search?q=${encodeURIComponent(query)}&fields=${this.fields}&limit=6`;
+  getPaintings(query?: string, page: number = 1, limit: number = this.defaultLimit): Observable<PaginatedPaintingsResponse> {
+    let url: string;
+    
+    if (query?.trim()) {
+      url = `${this.baseUrl}/search?q=${encodeURIComponent(query)}&fields=${this.fields}&page=${page}&limit=${limit}`;
+    } else {
+      url = `${this.baseUrl}?fields=${this.fields}&page=${page}&limit=${limit}`;
     }
 
     return this.http.get<ArtworksResponse>(url).pipe(
-      map(response => response.data || []),
+      map(response => ({
+        paintings: response.data || [],
+        totalCount: response.pagination?.total || 0,
+        currentPage: response.pagination?.current_page || page,
+        totalPages: response.pagination?.total_pages || 1
+      })),
       catchError(err => {
         console.error('Get paintings error:', err);
-        return of([]);
+        return of({
+          paintings: [],
+          totalCount: 0,
+          currentPage: 1,
+          totalPages: 1
+        });
       })
     );
   }
@@ -68,7 +96,7 @@ export class PaintingsService {
   getImageUrl(imageId: string): string {
     if (!imageId) return '';
     const imageUrl = `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
-    return `http://localhost:3000/proxy/${encodeURIComponent(imageUrl)}`;
+    return `${(imageUrl)}`;
   }
 
 }

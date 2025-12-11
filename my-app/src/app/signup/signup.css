@@ -147,3 +147,26 @@
   color: #4169E1;
   text-decoration: underline;
 }
+
+/* Validation styles */
+.input-error {
+  border-color: #c62828 !important;
+}
+
+.input-error:focus {
+  box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.1) !important;
+}
+
+.field-error {
+  color: #c62828;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
+}
+
+.password-hint {
+  color: #888;
+  font-size: 0.8rem;
+  margin-top: 4px;
+  display: block;
+}

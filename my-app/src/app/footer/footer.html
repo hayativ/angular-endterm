@@ -1,8 +1,10 @@
 <div class="subscribe-block">
-  <p class="text">{{ ticketMessage }}
-    <button (click)="ticket()">{{ ticketButton}}</button>
-    <span>Visitors: {{ ticketCnt }}</span>
+  <p class="text">{{ t.ticketMessage }}
+    <button (click)="ticket()">{{ t.ticketButton }}</button>
+    <span>{{ t.visitors }}: {{ ticketCnt }}</span>
   </p>
-  <button (click)="buy()">{{ buyButton }}</button>
-  <p class="text"> {{ paymentMessage }}</p>
+  <button (click)="buy()">{{ t.buyButton }}</button>
+  @if (showPaymentMessage) {
+    <p class="text">{{ t.paymentMessage }}</p>
+  }
 </div>

@@ -6,6 +6,8 @@ import { PaintingDetails } from './painting-details/painting-details';
 import { Login } from './login/login';
 import { Signup } from './signup/signup';
 import { Profile } from './profile/profile';
+import { Favorites } from './favorites/favorites';
+import { Offline } from './offline/offline';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -15,6 +17,8 @@ export const routes: Routes = [
     { path: 'paintings/:id', component: PaintingDetails },
     { path: 'login', component: Login },
     { path: 'signup', component: Signup },
+    { path: 'favorites', component: Favorites },
+    { path: 'offline', component: Offline },
     {
         path: 'profile',
         component: Profile,

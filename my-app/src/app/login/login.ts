@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService, AuthError } from '../services/auth.service';
+import { TranslationService } from '../services/translation.service';
 
 @Component({
     selector: 'app-login',
@@ -12,10 +13,16 @@ import { AuthService, AuthError } from '../services/auth.service';
     styleUrl: './login.css'
 })
 export class Login {
+    readonly translationService = inject(TranslationService);
+    
     email = '';
     password = '';
     isLoading = false;
     errorMessage = '';
+
+    get t() {
+        return this.translationService.translations().login;
+    }
 
     constructor(
         private readonly authService: AuthService,

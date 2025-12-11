@@ -3,12 +3,12 @@ import { Painting } from '../../services/paintings.service';
 
 export const loadPaintings = createAction(
     '[Painting List] Load Paintings',
-    props<{ query?: string }>()
+    props<{ query?: string; page?: number; limit?: number }>()
 );
 
 export const loadPaintingsSuccess = createAction(
     '[Painting API] Load Paintings Success',
-    props<{ paintings: Painting[] }>()
+    props<{ paintings: Painting[]; totalCount: number; currentPage: number; totalPages: number }>()
 );
 
 export const loadPaintingsFailure = createAction(

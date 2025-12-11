@@ -12,4 +12,12 @@
       <small>{{ painting.date_display }}</small>
     </div>
   </a>
+  <button 
+    class="favorite-btn" 
+    [class.is-favorite]="isFavorite"
+    (click)="toggleFavorite($event)"
+    [title]="isFavorite ? 'Remove from favorites' : 'Add to favorites'"
+  >
+    {{ isFavorite ? '♥' : '♡' }}
+  </button>
 </li>

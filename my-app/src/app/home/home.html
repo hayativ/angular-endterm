@@ -1,15 +1,15 @@
 <div class="home-container">
   <div class="hero-section">
-    <h1>{{ title }}</h1>
-    <p class="subtitle">{{ subtitle }}</p>
-    <a routerLink="/paintings" class="cta-button">Explore Collection</a>
+    <h1>{{ t.title }}</h1>
+    <p class="subtitle">{{ t.subtitle }}</p>
+    <a routerLink="/paintings" class="cta-button">{{ t.exploreButton }}</a>
   </div>
 
   <section class="featured-section">
-    <h2>Featured Artworks</h2>
+    <h2>{{ t.featuredArtworks }}</h2>
 
     @if (loading$ | async) {
-      <p class="loading">Loading featured artworks...</p>
+      <p class="loading">{{ t.loadingFeatured }}</p>
     }
 
     @if (featuredPaintings$ | async; as featuredPaintings) {
@@ -37,8 +37,8 @@
   </section>
 
   <section class="about-preview">
-    <h2>About the Museum</h2>
-    <p>The Art Institute of Chicago is one of the oldest and largest art museums in the United States, housing a collection of over 300,000 works of art.</p>
-    <a routerLink="/about" class="learn-more">Learn More →</a>
+    <h2>{{ t.aboutMuseum }}</h2>
+    <p>{{ t.aboutDescription }}</p>
+    <a routerLink="/about" class="learn-more">{{ t.learnMore }}</a>
   </section>
 </div>

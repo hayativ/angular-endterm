@@ -32,3 +32,34 @@ export const selectDetailsError = createSelector(
     selectPaintingState,
     (state) => state.errorDetails
 );
+
+// Pagination selectors
+export const selectTotalCount = createSelector(
+    selectPaintingState,
+    (state) => state.totalCount
+);
+
+export const selectCurrentPage = createSelector(
+    selectPaintingState,
+    (state) => state.currentPage
+);
+
+export const selectTotalPages = createSelector(
+    selectPaintingState,
+    (state) => state.totalPages
+);
+
+export const selectItemsPerPage = createSelector(
+    selectPaintingState,
+    (state) => state.itemsPerPage
+);
+
+export const selectPaginationInfo = createSelector(
+    selectPaintingState,
+    (state) => ({
+        totalCount: state.totalCount,
+        currentPage: state.currentPage,
+        totalPages: state.totalPages,
+        itemsPerPage: state.itemsPerPage
+    })
+);
